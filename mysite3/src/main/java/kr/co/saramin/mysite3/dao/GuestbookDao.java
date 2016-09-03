@@ -9,9 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import kr.co.saramin.mysite3.vo.GuestbookVo;
 
-
+@Repository
 public class GuestbookDao {
 
 	private Connection getConnection() throws SQLException {
