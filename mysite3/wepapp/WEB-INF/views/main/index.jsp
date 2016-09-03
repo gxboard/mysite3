@@ -1,23 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html>
 <head>
-<title>mysite2</title>
+<title>mysite3</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="<%=request.getContextPath() %>/assets/css/main.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }">
 </head>
 <body>
 	<div id="container">
+	
 		<div id="header">
-			<h1><a href="/mysite">MySite2</a></h1>
-			<ul>
-				<li><a href="">로그인</a><li>
-				<li><a href="">회원가입</a><li>
-				<li><a href="">회원정보수정</a><li>
-				<li><a href="">로그아웃</a><li>
-				<li>님 안녕하세요 ^^;</li>
-			</ul>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		</div>
 		<div id="wrapper">
 			<div id="content">
@@ -29,7 +24,7 @@
 						메뉴는  사이트 소개, 방명록, 게시판이 있습니다.<br>
 						JAVA 수업 + 데이터베이스 수업 + Servlet/JSP + Spring MVC + JPA(Hibernate) 수업 배운 거 있는거 없는 거 다 합쳐서
 						만들어 놓은 사이트 입니다.<br><br>
-						<a href="<%=request.getContextPath() %>/guestbook">방명록</a>에 글 남기기<br>
+						<a href="<%=request.getContextPath() %>/guest-book">방명록</a>에 글 남기기<br>
 					</p>
 				</div>
 			</div>
@@ -37,8 +32,8 @@
 		<div id="navigation">
 			<ul>
 				<li><a href="">안대혁</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
+				<li><a href="/guest-book">방명록</a></li>
+				<li><a href="/board">게시판</a></li>
 			</ul>
 		</div>
 		<div id="footer">
