@@ -11,4 +11,10 @@ public class IndexController {
 	{
 		return "/WEB-INF/views/main/index.jsp"; 
 	}
+	
+	@RequestMapping("/")
+	public String main()
+	{
+	    return "/WEB-INF/views/main/index.jsp"; 
+	}
 }

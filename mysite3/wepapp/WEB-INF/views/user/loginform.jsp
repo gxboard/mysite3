@@ -28,16 +28,7 @@
 				</form>
 			</div>
 		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="">안대혁</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2015</p>
-		</div>
+		<c:import url="/WEB-INF/views/include/navigation-footer.jsp"></c:import>
 	</div>
 </body>
 </html>

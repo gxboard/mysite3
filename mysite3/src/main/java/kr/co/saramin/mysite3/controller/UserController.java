@@ -49,6 +49,7 @@ public class UserController {
 	{
 		UserVo authUser = userService.login(userVo);
 		if (authUser == null) {
+		    // session.setAttribute("authUser", userVo);
 			return "redirect:/user/loginform?result=fail";
 		}
 		

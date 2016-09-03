@@ -20,5 +20,15 @@ public class GuestBookService {
 		return guestbookDao.getList();
 	}
 	
+	public void write(GuestbookVo vo)
+	{
+	    guestbookDao.insert(vo);
+	}
+	
+	public Integer delete(GuestbookVo vo)
+	{
+	    return guestbookDao.delete(vo);
+	}
+	
 
 }

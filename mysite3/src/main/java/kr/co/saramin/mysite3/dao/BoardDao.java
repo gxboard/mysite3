@@ -11,10 +11,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import kr.co.saramin.mysite3.vo.GuestbookVo;
+import kr.co.saramin.mysite3.vo.BoardVo;
 
 @Repository
-public class GuestbookDao {
+public class BoardDao {
 
 	private Connection getConnection() throws SQLException {
 		Connection connection = null;
@@ -31,9 +31,9 @@ public class GuestbookDao {
 		return connection;
 	}
 	
-	public GuestbookVo get( Long no ) {
+	public BoardVo get( Long no ) {
 		
-		GuestbookVo vo = null;
+		BoardVo vo = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -41,18 +41,16 @@ public class GuestbookDao {
 		try {
 			conn = getConnection();
 			
-			String sql = "SELECT no, name, DATE_FORMAT( reg_date, '%Y-%m-%d %p %h:%i:%s' ), message from guestbook where no = ?";
+			String sql = "SELECT no, name, DATE_FORMAT( reg_date, '%Y-%m-%d %p %h:%i:%s' ), message from board where no = ?";
 			pstmt = conn.prepareStatement( sql );
 			
 			pstmt.setLong( 1, no ); 
 			rs = pstmt.executeQuery();
 			if( rs.next() ) {
-				vo = new GuestbookVo();
+				vo = new BoardVo();
 
 				vo.setNo( rs.getLong( 1 ) );
-				vo.setName( rs.getString( 2 ) );
 				vo.setRegDate( rs.getString( 3 ) );
-				vo.setMessage( rs.getString( 4 ) );				
 			}
 			
 			return vo;
@@ -77,18 +75,18 @@ public class GuestbookDao {
 		}
 	}
 	
-	public void insert( GuestbookVo vo ) {
+	public void insert( BoardVo vo ) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try{
 			conn = getConnection();
 			
-			String sql = "INSERT INTO guestbook VALUES( null, ?, now(), ?, password(?) )";
+			String sql = "INSERT INTO board VALUES( null, ?, ?, 0, now(), ?)";
 			pstmt = conn.prepareStatement( sql );
 			
-			pstmt.setString( 1,  vo.getName() );
-			pstmt.setString( 2, vo.getMessage() );
-			pstmt.setString( 3, vo.getPassword() );
+			pstmt.setString( 1, vo.getTitle()  );
+			pstmt.setString( 2, vo.getContent());
+			pstmt.setLong(   3, vo.getUserNo() );
 
 			pstmt.executeUpdate();
 			
@@ -108,17 +106,16 @@ public class GuestbookDao {
 		}
 	}
 	
-	public Integer delete( GuestbookVo vo ) {
+	public Integer delete( BoardVo vo ) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		Integer updateCount = 0;
 		
 		try{
 			conn = getConnection();
-			String sql = "DELETE FROM guestbook WHERE no = ? AND password = password(?)";
+			String sql = "DELETE FROM board WHERE no = ? AND password = password(?)";
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setLong( 1,  vo.getNo() );
-			pstmt.setString( 2, vo.getPassword() );
 			pstmt.executeUpdate();
 			updateCount = pstmt.getUpdateCount();
 		} catch( SQLException ex ) {
@@ -139,27 +136,23 @@ public class GuestbookDao {
 		return updateCount;
 	}
 	
-	public List<GuestbookVo> getList() {
-		List<GuestbookVo> list = new ArrayList<GuestbookVo>();
+	public List<BoardVo> getList() {
+		List<BoardVo> list = new ArrayList<BoardVo>();
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String sql = "SELECT no, name, DATE_FORMAT( reg_date, '%Y-%m-%d %p %h:%i:%s' ), message from guestbook ORDER BY reg_date desc";
+			String sql = "SELECT no, name, DATE_FORMAT( reg_date, '%Y-%m-%d %p %h:%i:%s' ), message from board ORDER BY reg_date desc";
 			rs = stmt.executeQuery( sql );
 			while( rs.next() ) {
 				Long no = rs.getLong( 1 );
-				String name = rs.getString( 2 );
 				String regDate = rs.getString( 3 );
-				String message = rs.getString( 4 );
 			
-				GuestbookVo vo = new GuestbookVo();
+				BoardVo vo = new BoardVo();
 				vo.setNo( no );
-				vo.setName( name );
 				vo.setRegDate( regDate );
-				vo.setMessage( message );
 				
 				list.add( vo );
 			}
@@ -180,7 +173,7 @@ public class GuestbookDao {
 				ex.printStackTrace();
 			}
 		}
-			
+		
 		return list;
 	}
 }

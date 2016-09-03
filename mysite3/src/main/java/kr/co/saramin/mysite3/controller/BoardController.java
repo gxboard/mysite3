@@ -15,46 +15,46 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.co.saramin.mysite3.service.GuestBookService;
-import kr.co.saramin.mysite3.vo.GuestbookVo;
+import kr.co.saramin.mysite3.service.BoardService;
+import kr.co.saramin.mysite3.vo.BoardVo;
 
 @Controller
-@RequestMapping("/guest-book")
-public class GuestBookController {
+@RequestMapping("/board")
+public class BoardController {
 	
 	@Autowired
-	private GuestBookService guestBookService;
+	private BoardService boardService;
 	
 	@RequestMapping("/")
     public String index()
     {
-	    return "forward:/guest-book/list";
+	    return "forward:/board/list";
     }
 	
 	@RequestMapping("/list")
 	public String list(Model model)
 	{
 		
-		List<GuestbookVo> list = guestBookService.getList();
+		List<BoardVo> list = boardService.getList();
 		model.addAttribute("list", list);
 		
-		return "/WEB-INF/views/guestbook/list.jsp";
+		return "/WEB-INF/views/board/list.jsp";
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
-    public String write(@ModelAttribute GuestbookVo vo)
+    public String write(@ModelAttribute BoardVo vo)
     {
         // System.out.println(vo);
-        guestBookService.write(vo);
+        boardService.write(vo);
         
-        return "redirect:/guest-book/";
+        return "redirect:/board/";
     }
 
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String delete(@ModelAttribute GuestbookVo vo, HttpSession session)
+	public String delete(@ModelAttribute BoardVo vo, HttpSession session)
 	{
 	    try {
-	        Integer updateCount = guestBookService.delete(vo);
+	        Integer updateCount = boardService.delete(vo);
 	        if (updateCount > 0) {
 	            session.setAttribute("flashMessage", "방명록 삭제 성공 - " + vo.getNo());
 	        } else {
@@ -67,7 +67,7 @@ public class GuestBookController {
 	        
 	    }
 
-	    return "redirect:/guest-book/";
+	    return "redirect:/board/";
 	}
 
 	
