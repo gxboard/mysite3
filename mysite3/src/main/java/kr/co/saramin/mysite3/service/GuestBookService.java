@@ -14,6 +14,14 @@ public class GuestBookService {
 	@Autowired
 	GuestbookDao guestbookDao;
 	
+	public List<GuestbookVo> getMessageList()
+	{
+		// GuestbookVo vo = guestbookDao.get(1L);
+		// System.out.println(vo);
+		
+		return guestbookDao.getList();
+	}
+	
 	
 	public List<GuestbookVo> getList()
 	{

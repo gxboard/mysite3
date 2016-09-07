@@ -38,7 +38,7 @@ public class BoardController {
 		List<BoardVo> list = boardService.getList();
 		model.addAttribute("list", list);
 		
-		return "/WEB-INF/views/board/list.jsp";
+		return "board/list";
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
@@ -77,7 +77,7 @@ public class BoardController {
 	public String deleteform(@PathVariable("no") Integer no, Model model)
 	{
 	    model.addAttribute("no", no);
-	    return "/WEB-INF/views/guestbook/deleteform.jsp";
+	    return "guestbook/deleteform";
 	}
 	
 	

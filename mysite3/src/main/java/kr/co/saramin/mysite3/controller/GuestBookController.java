@@ -25,20 +25,13 @@ public class GuestBookController {
 	@Autowired
 	private GuestBookService guestBookService;
 	
-	@RequestMapping("/")
-    public String index()
-    {
-	    return "forward:/guest-book/list";
-    }
-	
-	@RequestMapping("/list")
+	@RequestMapping(value={"/list", "/"})
 	public String list(Model model)
 	{
-		
-		List<GuestbookVo> list = guestBookService.getList();
+		List<GuestbookVo> list = guestBookService.getMessageList();
 		model.addAttribute("list", list);
 		
-		return "/WEB-INF/views/guestbook/list.jsp";
+		return "guestbook/list";
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
@@ -77,7 +70,7 @@ public class GuestBookController {
 	public String deleteform(@PathVariable("no") Integer no, Model model)
 	{
 	    model.addAttribute("no", no);
-	    return "/WEB-INF/views/guestbook/deleteform.jsp";
+	    return "guestbook/deleteform";
 	}
 	
 	

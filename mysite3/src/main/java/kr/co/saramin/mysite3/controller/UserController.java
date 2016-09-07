@@ -23,13 +23,13 @@ public class UserController {
 	@RequestMapping("/index")
 	public String index()
 	{
-		return "/WEB-INF/views/main/index.jsp"; 
+		return "main/index"; 
 	}
 	
 	@RequestMapping("/joinform")
 	public String joinform()
 	{
-		return "/WEB-INF/views/user/joinform.jsp";
+		return "user/joinform";
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
@@ -43,7 +43,36 @@ public class UserController {
 	@RequestMapping("/loginform")
 	public String loginform()
 	{
-		return "/WEB-INF/views/user/loginform.jsp";
+		return "user/loginform";
+	}
+	
+	@RequestMapping("modifyform")
+	public String modifyform(HttpSession session)
+	{
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		if (authUser == null) {
+			session.setAttribute("flashMessage", "로그인이 필요합니다.");
+			return "redirect:/user/loginform";
+		}
+		
+		return "user/modifyform";
+	}
+	
+	
+	@RequestMapping("/update")
+	public String update(HttpSession session, @ModelAttribute UserVo vo)
+	{
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		if (authUser == null) {
+			session.setAttribute("flashMessage", "로그인이 필요합니다.");
+			return "redirect:/user/loginform";
+		}
+		
+		vo.setNo(authUser.getNo());
+		
+		userService.modifyUser(vo);
+		
+		return "redirect:/index";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)

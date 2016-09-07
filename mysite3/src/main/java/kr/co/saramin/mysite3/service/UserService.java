@@ -18,6 +18,12 @@ public class UserService {
 		System.out.println("UserService.join()");
 	}
 	
+	public void modifyUser(UserVo vo)
+	{
+		// userDao.update(vo);
+		System.out.println("UserService.update()");
+	}
+	
 	public UserVo login(UserVo userVo)
 	{
 		UserVo authUser = userDao.get(userVo);
