@@ -81,7 +81,7 @@ public class UserDao {
 		PreparedStatement pstmt = null;
 		try {
 			conn = getConnection();
-			String sql = "INSERT INTO user VALUES (null, ?, ?, password(?), ? )";
+			String sql = "INSERT x INTO user VALUES (null, ?, ?, password(?), ? )";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString( 1, vo.getName() );

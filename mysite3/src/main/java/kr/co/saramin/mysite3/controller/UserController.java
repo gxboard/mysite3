@@ -4,10 +4,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.saramin.mysite3.exception.UserDaoException;
 import kr.co.saramin.mysite3.service.UserService;
 import kr.co.saramin.mysite3.vo.UserVo;
 
@@ -67,7 +69,6 @@ public class UserController {
 		
 		return "redirect:/index";
 	}
-	
 	
 	
 	
