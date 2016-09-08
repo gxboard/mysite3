@@ -41,6 +41,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter implements Handle
         
         UserVo authUser = (UserVo) session.getAttribute("authUser");
         if (authUser == null) {
+            session.setAttribute("flashMessage", "로그인이 필요합니다.");
             response.sendRedirect(request.getContextPath() + "/user/loginform");
             return false;
         }

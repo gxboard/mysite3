@@ -7,6 +7,9 @@
 	VALUES (null, #{name }, #{email}, PASSWORD(#{password}), #{gender})
 	]]>
 	</insert>
+	<select id="getByNo" parameterType="long" resultType="uservo"><![CDATA[
+	SELECT no, name, email, gender FROM user WHERE no=#{no}
+	]]></select> 
 	<select id="getByEmail" parameterType="string" resultType="uservo"><![CDATA[
 	SELECT no, name FROM user WHERE email=#{email}
 	order by 1 desc 
