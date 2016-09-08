@@ -73,6 +73,14 @@ public class GuestBookController {
 	    return "guestbook/deleteform";
 	}
 	
+	@RequestMapping(value={"/ajax"})
+    public String ajax(Model model)
+    {
+        List<GuestbookVo> list = guestBookService.getMessageList();
+        model.addAttribute("list", list);
+        
+        return "guestbook/ajax";
+    }
 	
 	
 	

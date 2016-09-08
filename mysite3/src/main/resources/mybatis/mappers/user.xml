@@ -7,11 +7,17 @@
 	VALUES (null, #{name }, #{email}, PASSWORD(#{password}), #{gender})
 	]]>
 	</insert>
+	<select id="getByEmail" parameterType="string" resultType="uservo"><![CDATA[
+	SELECT no, name FROM user WHERE email=#{email}
+	order by 1 desc 
+		limit 1
+	]]></select> 
 	<select id="getByEmailAndPassword" parameterType="uservo"
 		resultType="uservo"><![CDATA[
 		SELECT no, name 
 		FROM user 
-		WHERE email=#{email} AND passwd=password(#{password}) 
+		WHERE email=#{email} 
+		AND passwd=password(#{password})
 		order by 1 desc 
 		limit 1
 	]]></select>

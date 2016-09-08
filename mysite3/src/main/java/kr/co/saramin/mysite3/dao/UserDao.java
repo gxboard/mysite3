@@ -17,6 +17,10 @@ public class UserDao {
 		return sqlSession.selectOne("user.getByEmailAndPassword", vo);
 	}
 	
+	public UserVo get( String email ) {
+        return sqlSession.selectOne("user.getByEmail", email);
+    }
+	
 	public void insert( UserVo vo ) throws UserDaoException {
 		sqlSession.insert("user.insert", vo);
 	}

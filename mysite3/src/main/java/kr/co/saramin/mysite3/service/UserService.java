@@ -32,5 +32,9 @@ public class UserService {
 		
 		//System.out.println("UserService.login()");
 	}
+	
+	public UserVo getUser(String email) {
+	    return userDao.get(email);
+	}
 
 }
