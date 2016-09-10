@@ -16,6 +16,8 @@
         http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
 	<context:annotation-config />
+	
+	<aop:aspectj-autoproxy />
 
 	<context:component-scan base-package="kr.co.saramin.mysite3">
 		<context:include-filter type="annotation"
